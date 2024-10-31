@@ -1,9 +1,6 @@
 test:
-  servers:
-    - "redis://localhost"
-  database: 1
+  host: "localhost"
+  db: 1
 
 development:
-  servers:
-    - "redis://localhost"
-
+  host: "localhost"
