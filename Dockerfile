@@ -5,7 +5,7 @@ MAINTAINER Jay Luker <jay_luker@harvard.edu>
 ARG RUBY_VERSION=3.3.0
 ARG POSTGRES_VERSION=16
 ARG BUNDLER_VERSION=2.5.10
-ARG REVISION=custom
+ARG REVISION=master
 ENV RAILS_ENV development
 ENV GEM_HOME /opt/canvas/.gems
 ENV GEM_PATH ${GEM_HOME}:/opt/canvas/.gem/ruby/${RUBY_VERSION}
