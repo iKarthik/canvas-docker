@@ -74,7 +74,7 @@ COPY assets/healthcheck.sh /usr/local/bin/healthcheck.sh
 RUN for config in amazon_s3 delayed_jobs domain file_store security external_migration \
        ; do cp config/$config.yml.example config/$config.yml \
        ; done
-
+RUN apt install libyaml-dev
 ARG BUNDLE=/opt/canvas/.local/share/gem/ruby/${RUBY_VERSION}/bin/bundle
 RUN sudo -u canvasuser ${BUNDLE} config set --local without 'development:test' \
   &&sudo -u canvasuser ${BUNDLE} config set --local without 'mysql' \
