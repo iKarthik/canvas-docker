@@ -2,7 +2,7 @@ test:
   domain: localhost
 
 development:
-  domain: "canvas.127.0.0.1.nip.io"
+  domain: "canvas-3000-9606900e32660686.elb.us-west-2.amazonaws.com"
   # If you want to set up SSL and a separate files domain, use the following and set up puma-dev from github.com/puma/puma-dev
   # domain: "canvas-lms.test" # for puma-dev
   # files_domain: "canvas-lms.files" # for puma-dev
