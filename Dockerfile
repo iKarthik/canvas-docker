@@ -5,7 +5,7 @@ MAINTAINER Jay Luker <jay_luker@harvard.edu>
 ARG RUBY_VERSION=3.3.0
 ARG POSTGRES_VERSION=16
 ARG BUNDLER_VERSION=2.5.10
-ARG REVISION=master
+ARG REVISION=custom
 ENV RAILS_ENV development
 ENV GEM_HOME /opt/canvas/.gems
 ENV GEM_PATH ${GEM_HOME}:/opt/canvas/.gem/ruby/${RUBY_VERSION}
@@ -59,7 +59,7 @@ COPY assets/pg_hba.conf /etc/postgresql/${POSTGRES_VERSION}/main/pg_hba.conf
 RUN sed -i "/^#listen_addresses/i listen_addresses='*'" /etc/postgresql/${POSTGRES_VERSION}/main/postgresql.conf
 
 RUN cd /opt/canvas \
-    && sudo -u canvasuser git clone https://github.com/instructure/canvas-lms.git --branch $REVISION --single-branch
+    && sudo -u canvasuser git clone https://github.com/iKarthik/canvas-lms --branch $REVISION --single-branch
 
 WORKDIR /opt/canvas/canvas-lms
 
@@ -81,6 +81,7 @@ RUN sudo -u canvasuser ${BUNDLE} config set --local without 'development:test' \
   && sudo -u canvasuser ${BUNDLE} install --jobs 8
 
 RUN sudo -u canvasuser yarn install --pure-lockfile && sudo -u canvasuser yarn cache clean
+ENV ADDITIONAL_ALLOWED_HOSTS canvas-3000-9606900e32660686.elb.us-west-2.amazonaws.com
 RUN sudo -u canvasuser COMPILE_ASSETS_NPM_INSTALL=0 ${BUNDLE} _${BUNDLER_VERSION}_ exec rake canvas:compile_assets_dev
 
 RUN sudo -u canvasuser mkdir -p log tmp/pids public/assets public/stylesheets/compiled \
